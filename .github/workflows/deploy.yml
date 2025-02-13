@@ -26,6 +26,6 @@ jobs:
             # Pull the latest changes from GitHub
             git pull origin main
             # Stop any running containers
-            docker-compose down
+            docker compose down
             # Rebuild and start containers in detached mode
-            docker-compose up --build -d
+            docker compose up --build -d
