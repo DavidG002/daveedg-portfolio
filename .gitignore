@@ -49,3 +49,7 @@ out
 .env
 .env.local
 .env.development
+
+#Local Nginx
+
+/infra/nginx/daveedg.com.local.conf

@@ -1,0 +1,31 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}        # e.g., 153.92.223.133
+          username: ${{ secrets.VPS_USER }}      # e.g., "David" or your deployment user
+          key: ${{ secrets.VPS_SSH_KEY }}        # your private SSH key (with proper line breaks)
+          # Optional: specify port if different from 22
+          # port: 22
+          script: |
+            cd /srv/daveedg.com/infra
+            # Pull the latest changes from GitHub
+            git pull origin main
+            # Stop any running containers
+            docker-compose down
+            # Rebuild and start containers in detached mode
+            docker-compose up --build -d
