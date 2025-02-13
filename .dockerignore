@@ -1,0 +1,16 @@
+# Ignore node modules and build artifacts
+node_modules
+dist
+tmp
+.git
+.gitignore
+Dockerfile*
+docker-compose*.yml
+
+# Ignore environment and log files
+.env*
+*.log
+
+# Optional: ignore IDE directories
+.vscode
+.idea

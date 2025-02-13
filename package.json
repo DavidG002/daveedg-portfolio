@@ -13,6 +13,7 @@
     "includedScripts": []
   },
   "dependencies": {
+    "@nx/next": "^20.4.3",
     "next": "~15.1.4",
     "react": "19.0.0",
     "react-dom": "19.0.0"
@@ -26,7 +27,6 @@
     "@nx/eslint-plugin": "20.4.3",
     "@nx/jest": "20.4.3",
     "@nx/js": "20.4.3",
-    "@nx/next": "20.4.3",
     "@nx/react": "^20.4.3",
     "@nx/workspace": "20.4.3",
     "@swc-node/register": "~1.9.1",

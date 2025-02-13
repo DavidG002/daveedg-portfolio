@@ -1,22 +1,22 @@
 //@ts-check
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { composePlugins, withNx } = require('@nx/next');
+// Default fallback functions (identity)
+let composePlugins = (config) => config;
+let withNx = (config) => config;
 
-/**
- * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
- **/
-const nextConfig = {
-  nx: {
-    // Set this to true if you would like to use SVGR
-    // See: https://github.com/gregberge/svgr
-    svgr: false,
-  },
-};
+try {
+  // Try to load the NX Next plugin for development
+  ({ composePlugins, withNx } = require('@nx/next'));
+} catch (error) {
+  console.warn("Warning: @nx/next not found. Using fallback Next.js configuration.");
+}
 
-const plugins = [
-  // Add more Next.js plugins to this list if needed.
-  withNx,
-];
+// No custom distDir; use Next.js default (.next)
+const nextConfig = {};
+
+const plugins = [];
+if (withNx !== ((config) => config)) {
+  plugins.push(withNx);
+}
 
 module.exports = composePlugins(...plugins)(nextConfig);
