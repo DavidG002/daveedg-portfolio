@@ -1,3 +1,5 @@
+// src\app\layout.tsx
+
 import './global.css'
 import { Inter } from 'next/font/google'
 import ClientLayout from '../components/ClientLayout'

@@ -1,3 +1,5 @@
+// src\components\ProjectCard.tsx
+
 import Image from "next/image"
 import { motion } from "framer-motion"
 
@@ -10,7 +12,7 @@ interface ProjectCardProps {
 export default function ProjectCard({ title, description, imageUrl }: ProjectCardProps) {
   return (
     <motion.div
-      className="bg-gray-800 rounded-lg overflow-hidden shadow-lg"
+      className="bg-gray-800 rounded-lg overflow-hidden shadow-lg project-card relative"
       whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.3 }}
     >
@@ -21,11 +23,10 @@ export default function ProjectCard({ title, description, imageUrl }: ProjectCar
         height={200}
         className="w-full h-48 object-cover"
       />
-      <div className="p-6">
+      <div className="p-6 relative z-10">
         <h3 className="text-xl font-semibold mb-2">{title}</h3>
         <p className="text-gray-400">{description}</p>
       </div>
     </motion.div>
   )
 }
-
