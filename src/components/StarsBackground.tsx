@@ -29,7 +29,7 @@ export default function StarsBackground() {
     const starTexture = loader.load("/textures/star4.png");
 
     // Create Particles
-    const starCount = 500;
+    const starCount = 75;
     const positions = new Float32Array(starCount * 3);
     const velocities = new Float32Array(starCount * 3).fill(0);
 
@@ -66,7 +66,7 @@ export default function StarsBackground() {
         const dy = (mouseRef.current.y * 5) - positions[index + 1];
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < 4) { // 🔹 Scatter area increased (was 1.5)
+        if (distance < 1.5) { // 🔹 Scatter area increased (was 1.5)
           const angle = Math.random() * Math.PI * 2;
           const force = 0.006 + Math.random() * 0.006; // 🔹 Slightly stronger scatter force
           velocities[index] += Math.cos(angle) * force;
@@ -86,7 +86,7 @@ export default function StarsBackground() {
         const index = i * 3;
 
         // Move stars downward **slowly**
-        positions[index + 1] -= 0.0004; // 🔹 Slower falling speed
+        positions[index + 1] -= 0.002; // 🔹 Slower falling speed
 
         // Reset stars when they reach the bottom
         if (positions[index + 1] < -5) {

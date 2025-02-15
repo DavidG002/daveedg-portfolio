@@ -22,10 +22,11 @@ jobs:
           # Optional: specify port if different from 22
           # port: 22
           script: |
-            cd /srv/daveedg.com/infra
-            # Pull the latest changes from GitHub
+            cd /srv/daveedg.com
+            git config --global --add safe.directory /srv/daveedg.com
             git pull origin main
-            # Stop any running containers
+            cd infra
+            # Export AUTH_PASSWORD from GitHub secrets
+            export AUTH_PASSWORD=${{ secrets.AUTH_PASSWORD }}
             docker compose down
-            # Rebuild and start containers in detached mode
             docker compose up --build -d

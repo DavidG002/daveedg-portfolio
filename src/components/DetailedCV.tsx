@@ -1,4 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
+"use client"
+
 import type React from "react"
 import { motion } from "framer-motion"
 
@@ -301,6 +303,32 @@ const DetailedCV: React.FC = () => {
           <li>
             <span className="block pl-2 -indent-2">
               Remote Work Experience: Proven ability to thrive in distributed teams and dynamic startup environments
+            </span>
+          </li>
+          <li>
+            <span className="block pl-2 -indent-2">
+              LinkedIn:{" "}
+              <a
+                href="https://linkedin.com/in/davidghazy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:underline"
+              >
+                linkedin.com/in/davidghazy
+              </a>
+            </span>
+          </li>
+          <li>
+            <span className="block pl-2 -indent-2">
+              GitHub:{" "}
+              <a
+                href="https://github.com/davidghazy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:underline"
+              >
+                github.com/davidghazy
+              </a>
             </span>
           </li>
         </ul>

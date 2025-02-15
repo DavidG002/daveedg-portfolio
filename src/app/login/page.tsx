@@ -1,24 +1,13 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
-import dynamic from "next/dynamic"
 
-const DynamicDetailedCV = dynamic(() => import("./DetailedCV"), { ssr: false })
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 
-const CVSection: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+export default function Login() {
   const [password, setPassword] = useState("")
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      const res = await fetch("/api/check-auth")
-      if (res.ok) {
-        setIsAuthenticated(true)
-      }
-    }
-    checkAuth()
-  }, [])
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -29,23 +18,14 @@ const CVSection: React.FC = () => {
     })
 
     if (res.ok) {
-      setIsAuthenticated(true)
+      router.push("/cv")
     } else {
       alert("Incorrect password")
     }
   }
 
-  if (isAuthenticated) {
-    return (
-      <section id="cv" className="py-20 px-4 md:px-20 bg-gray-800">
-        <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">Course of Life - CV </h2>
-        <DynamicDetailedCV />
-      </section>
-    )
-  }
-
   return (
-    <div className="flex items-center justify-center bg-gray-900 p-8 rounded-lg">
+    <div className="flex items-center justify-center min-h-screen bg-gray-900">
       <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold mb-4 text-white">Enter Password to View CV</h2>
         <input
@@ -62,8 +42,4 @@ const CVSection: React.FC = () => {
     </div>
   )
 }
-
-export default CVSection
-
-
 
