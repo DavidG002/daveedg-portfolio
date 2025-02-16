@@ -35,35 +35,39 @@ const CVSection: React.FC = () => {
     }
   }
 
-  if (isAuthenticated) {
-    return (
-      <section id="cv" className="py-20 px-4 md:px-20 bg-gray-800">
-        <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">Course of Life - CV </h2>
-        <DynamicDetailedCV />
-      </section>
-    )
-  }
-
   return (
-    <div className="flex items-center justify-center bg-gray-900 p-8 rounded-lg">
-      <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-4 text-white">Enter Password to View CV</h2>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 mb-4 bg-gray-700 text-white rounded"
-          placeholder="Enter password"
-        />
-        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors">
-          Submit
-        </button>
-      </form>
-    </div>
+    <section id="cv" className="py-20 px-4 md:px-20 bg-gray-800">
+      {/* Title is always visible */}
+      <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center text-white">
+        Course of Life - CV
+      </h2>
+
+      {isAuthenticated ? (
+        // Authenticated: display the detailed CV content
+        <DynamicDetailedCV />
+      ) : (
+        // Not authenticated: display the login form in a centered container
+        <div className="flex items-center justify-center">
+          <form onSubmit={handleSubmit} className="bg-gray-700 p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 className="text-2xl font-bold mb-4 text-white">Enter Password to View CV</h3>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-2 mb-4 bg-gray-600 text-white rounded"
+              placeholder="Enter password"
+            />
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      )}
+    </section>
   )
 }
 
 export default CVSection
-
-
-
