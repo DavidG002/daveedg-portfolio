@@ -34,7 +34,7 @@ export default function Home() {
             linkedin.com/in/davidghazy
           </a>
         </p>
-        <p className="text-xl mb-4">Tel: +972 52-801-6968 | US: +1 415-644-5102</p>
+      
         <p className="text-xl">
           GitHub:{" "}
           <a
