@@ -30,6 +30,9 @@
     COPY --from=builder /app/package.json ./
     COPY --from=builder /app/pnpm-lock.yaml ./
     COPY --from=builder /app/next.config.js ./
+
+    # *** Copy the public folder ***
+    COPY --from=builder /app/public ./public
     
     # Install production dependencies only
     RUN npm install -g pnpm && pnpm install --prod
