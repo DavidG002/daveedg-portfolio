@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client"
 
 import type React from "react"
@@ -39,7 +40,7 @@ const CVSection: React.FC = () => {
     <section id="cv" className="py-20 px-4 md:px-20 bg-gray-800">
       {/* Title is always visible */}
       <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center text-white">
-        Course of Life - CV
+        "Course of Life"
       </h2>
 
       {isAuthenticated ? (
