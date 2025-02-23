@@ -22,9 +22,11 @@ jobs:
           script: |
             cd /srv/daveedg.com
             git config --global --add safe.directory /srv/daveedg.com
-            git pull origin main
+            git fetch origin
+            git reset --hard origin/main
             cd infra
             # Export AUTH_PASSWORD from GitHub secrets
             export AUTH_PASSWORD=${{ secrets.AUTH_PASSWORD }}
             docker compose down
-            docker compose up --build -d
+            docker compose build --no-cache
+            docker compose up -d
