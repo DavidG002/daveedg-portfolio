@@ -3,7 +3,7 @@
 // Default fallback functions
 const defaultWithNx = (config) => config;
 let withNx = defaultWithNx;
-let composePlugins = (config) => config;
+let composePlugins = null; // Set to null initially
 
 try {
   // Load NX Next plugin
@@ -21,4 +21,5 @@ if (withNx !== defaultWithNx) {
 // Next.js config
 const nextConfig = {};
 
-module.exports = composePlugins(...plugins)(nextConfig);
+// Export the config, applying plugins only if composePlugins is available
+module.exports = composePlugins ? composePlugins(...plugins)(nextConfig) : nextConfig;

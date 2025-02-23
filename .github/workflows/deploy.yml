@@ -23,6 +23,7 @@ jobs:
             cd /srv/daveedg.com
             sudo chown -R ${USER}:${USER} /srv/daveedg.com/
             git config --global --add safe.directory /srv/daveedg.com
+            [ -d public/Projects ] && mv public/Projects public/projects
             git fetch origin
             git reset --hard origin/main
             cd infra
