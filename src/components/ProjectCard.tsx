@@ -55,7 +55,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, cardImage
         ) : (
           <>
             <Image
-              src="/Projects/clickhouse_place.png" // Fallback
+              src="/projects/clickhouse_place.png" // Fallback
               alt="Placeholder"
               fill
               className="absolute inset-0 object-cover"

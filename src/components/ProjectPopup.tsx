@@ -67,7 +67,7 @@ const ProjectPopup: React.FC<ProjectPopupProps> = ({ isOpen, onClose, title, ful
                 </div>
               ) : (
                 <Image
-                  src="/Projects/ch-logo.gif" // Fallback
+                  src="/projects/ch-logo.gif" // Fallback
                   alt="Placeholder"
                   width={600}
                   height={400}

@@ -54,7 +54,7 @@ export default function ClientHome() {
       title: "ClickPulse",
       description: "real-time analytics",
       cardImageUrl: "/projects/clickhouse_place2.png",
-      popupImageUrl: "/Projects/ch-logo.gif", // Animated GIF
+      popupImageUrl: "/projects/ch-logo.gif", // Animated GIF
       isLibPly: false,
       fullDescription:
         "An experimental project exploring new technologies and workflows to solve real-world problems. More details to come as it develops!",
