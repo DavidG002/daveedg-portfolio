@@ -1,22 +1,24 @@
 //@ts-check
 
-// Default fallback functions (identity)
+// Default fallback functions
+const defaultWithNx = (config) => config;
+let withNx = defaultWithNx;
 let composePlugins = (config) => config;
-let withNx = (config) => config;
 
 try {
-  // Try to load the NX Next plugin for development
+  // Load NX Next plugin
   ({ composePlugins, withNx } = require('@nx/next'));
 } catch (error) {
-  console.warn("Warning: @nx/next not found. Using fallback Next.js configuration.");
+  console.warn("Warning: @nx/next not found. Details:", error.message);
 }
 
-// No custom distDir; use Next.js default (.next)
-const nextConfig = {};
-
+// Build plugins array
 const plugins = [];
-if (withNx !== ((config) => config)) {
+if (withNx !== defaultWithNx) {
   plugins.push(withNx);
 }
+
+// Next.js config
+const nextConfig = {};
 
 module.exports = composePlugins(...plugins)(nextConfig);
