@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from "react"; // Added React import
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectCard from "./ProjectCard";
-import ProjectPopup from "./ProjectPopup";
+import ProjectPopup from "./ProjectPopup"
 
 export default function ClientHome() {
   const quotes = [
