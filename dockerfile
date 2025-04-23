@@ -1,5 +1,5 @@
 # ---------- Stage 1: Build ----------
-    FROM node:22-alpine AS builder
+    FROM node:18-alpine AS builder
 
     # Set working directory
     WORKDIR /app
@@ -17,11 +17,7 @@
     RUN pnpm next build
     
     # ---------- Stage 2: Production Runner ----------
-    FROM node:22-alpine AS runner
-    
-    # Create a non-root user for security
-    RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-    USER appuser
+    FROM node:18-alpine AS runner
     
     # Set production environment
     ENV NODE_ENV=production
@@ -29,20 +25,20 @@
     # Set working directory
     WORKDIR /app
     
-    # Copy the built Next.js output and required files from the builder stage
-    COPY --from=builder --chown=appuser:appgroup /app/.next ./.next
-    COPY --from=builder --chown=appuser:appgroup /app/package.json ./
-    COPY --from=builder --chown=appuser:appgroup /app/pnpm-lock.yaml ./
-    COPY --from=builder --chown=appuser:appgroup /app/next.config.js ./
-    
-    # Copy the public folder
-    COPY --from=builder --chown=appuser:appgroup /app/public ./public
+    # Copy the built Next.js output and required files from the builder stage.
+    COPY --from=builder /app/.next ./.next
+    COPY --from=builder /app/package.json ./
+    COPY --from=builder /app/pnpm-lock.yaml ./
+    COPY --from=builder /app/next.config.js ./
+
+    # *** Copy the public folder ***
+    COPY --from=builder /app/public ./public
     
     # Install production dependencies only
     RUN npm install -g pnpm && pnpm install --prod
     
-    # Expose port 3000
+    # Expose port 3000 (or whichever port you plan to use)
     EXPOSE 3000
     
-    # Start the Next.js production server
+    # Start the Next.js production server (uses "next start" so NX CLI isn’t needed)
     CMD ["pnpm", "next", "start"]
