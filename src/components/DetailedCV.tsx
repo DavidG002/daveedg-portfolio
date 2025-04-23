@@ -311,7 +311,7 @@ const DetailedCV: React.FC = () => {
                 rel="noopener noreferrer"
                 className="text-blue-400 hover:underline"
               >
-                github.com/davidghazy
+                https://github.com/DavidG002/
               </a>
             </span>
           </li>
