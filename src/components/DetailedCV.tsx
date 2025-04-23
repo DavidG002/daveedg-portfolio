@@ -31,7 +31,20 @@ const DetailedCV: React.FC = () => {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="mb-12"
       >
-        <h3 className="text-xl font-semibold mb-4">Core Competencies</h3>
+        <h3 className="text-2xl font-semibold mb-4 font-poppins text-blue-400">About Me</h3>
+        <p className="text-gray-300 text-base">
+          10 years of SaaS sales experience helping startups reach global scale from bootstrap to enterprise initiatives, bridging the barriers for SMB and Enterprise sales cycles. Led full-cycle SaaS/IaaS sales, from prospecting to closing, surpassing quotas by 200%+ in subscription, consumption, and professional services deals. Developed strategic sales plans, aligning solution selling proposition with customer needs to maximize ROI and position as the preferred leading provider. Mastered qualifying and selling tactics, leveraging BANT, MEDDPIC, Solution Selling, Challenger, SNAP, The Sandler System, and Target Account Selling to drive revenue growth at scale of $10M.
+        </p>
+      </motion.section>
+
+      <motion.section
+        initial="hidden"
+        animate="visible"
+        variants={sectionVariants}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        className="mb-12"
+      >
+        <h3 className="text-2xl font-semibold mb-4 font-poppins text-blue-400">Core Competencies</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-gray-800 p-4 rounded-lg">
             <p className="text-white font-bold">Full-Cycle Sales Management</p>
@@ -66,27 +79,24 @@ const DetailedCV: React.FC = () => {
         initial="hidden"
         animate="visible"
         variants={sectionVariants}
-        transition={{ duration: 0.5, delay: 0.4 }}
+        transition={{ duration: 0.5, delay: 0.6 }}
         className="mb-12"
       >
         <h3 className="text-2xl font-semibold mb-4 font-poppins text-blue-400">Selected Key Performance Highlights</h3>
         <ul className="list-disc list-outside pl-5 text-gray-300 space-y-2">
           <li>
-            <span className="block pl-2 -indent-2">
-              Cloud & Pipeline Mastery: Leveraged 12+ years in SaaS to generate $10M+ in new ARR and drive 30% annual
-              revenue growth by aligning cloud solutions with customer business needs.
+            <span className="block">
+              Cloud & Pipeline Mastery: Leveraged 10+ years in SaaS to generate $10M+ in new ARR and drive 30% annual revenue growth by aligning cloud solutions with customer business needs.
             </span>
           </li>
           <li>
-            <span className="block pl-2 -indent-2">
-              Solution-Based Sales Excellence: Managed full-cycle sales—from prospecting to closing both short-term
-              cloud contracts and complex enterprise deals—consistently exceeding quarterly targets by up to 200%.
+            <span className="block">
+              Solution-Based Sales Excellence: Managed full-cycle sales—from prospecting to closing both short-term cloud contracts and complex enterprise deals—consistently exceeding quarterly targets by up to 200%.
             </span>
           </li>
           <li>
-            <span className="block pl-2 -indent-2">
-              Leadership & Community Engagement: Built and mentored high-performing teams, secured strategic
-              partnerships, and utilized CRM insights (Salesforce) to forecast growth and engage user communities.
+            <span className="block">
+              Leadership & Community Engagement: Built and mentored high-performing teams, secured strategic partnerships, and utilized CRM insights (Salesforce) to forecast growth and engage user communities.
             </span>
           </li>
         </ul>
@@ -96,7 +106,7 @@ const DetailedCV: React.FC = () => {
         initial="hidden"
         animate="visible"
         variants={sectionVariants}
-        transition={{ duration: 0.5, delay: 0.6 }}
+        transition={{ duration: 0.5, delay: 0.8 }}
         className="mb-12"
       >
         <h3 className="text-2xl font-semibold mb-4 font-poppins text-blue-400">Professional Experience</h3>
@@ -104,33 +114,29 @@ const DetailedCV: React.FC = () => {
         <div className="mb-8">
           <h4 className="text-lg font-medium mb-1">SQUARETALK</h4>
           <p className="text-sm text-gray-400 mb-2">
-            Cloud-based SaaS contact center & communications platform - open source stack
+            Cloud-based SaaS contact center & communications platform
           </p>
-          <p className="text-sm text-gray-400 mb-2">Tel Aviv / Remote | August 2021 – February 2023</p>
+          <p className="text-sm text-gray-400 mb-2">Jerusalem / Remote | August 2021 – February 2023</p>
           <p className="text-md font-medium mb-2">Director of Sales & Partnerships</p>
           <ul className="list-disc list-outside pl-5 text-gray-300 space-y-2">
             <li>
-              <span className="block pl-2 -indent-2">
-                Revenue Growth: Drove a record 30% annual revenue increase; secured $1.2M in new ARR to elevate total
-                annual sales to $5.2M.
+              <span className="block">
+                Revenue Leadership: Oversaw sales of new business and partnerships exceeding quota with revenue mix of 30% indirect, 50% direct, 20% outreach sales, reporting directly to CEO and board of directors.
               </span>
             </li>
             <li>
-              <span className="block pl-2 -indent-2">
-                Full-Cycle Sales Leadership: Managed a team of four sales managers, setting KPIs and mentoring them
-                through every phase of the sales process.
+              <span className="block">
+                Team Achievement: Led a team of four sales managers to achieve a record 30% increase in new business, closing $1.2M in new ARR with an ACV of $8K, surpassing per-quarter team quota of $120K.
               </span>
             </li>
             <li>
-              <span className="block pl-2 -indent-2">
-                Strategic Expansion: Established five new technology partner/reseller agreements, boosting indirect
-                business by 60%.
+              <span className="block">
+                Strategic Partnerships: Signed five technology partner/reseller agreements as an individual contributor, increasing indirect business by 60%, and closed four strategic accounts ($35K–$90K+ ARR) while overseeing 40 additional deals.
               </span>
             </li>
             <li>
-              <span className="block pl-2 -indent-2">
-                Key Deals: Personally closed four high-value accounts (each contributing $35K–$60K ARR) and oversaw 40
-                additional deals via targeted outbound efforts and partner referrals.
+              <span className="block">
+                Process Optimization: Reshaped sales strategy, USP, GTM, and business operation workflows, enhancing lead generation, market penetration, and business process optimization with improved sales analytics.
               </span>
             </li>
           </ul>
@@ -145,27 +151,23 @@ const DetailedCV: React.FC = () => {
           <p className="text-md font-medium mb-2">Head of Inside Sales</p>
           <ul className="list-disc list-outside pl-5 text-gray-300 space-y-2">
             <li>
-              <span className="block pl-2 -indent-2">
-                Pipeline Development: Built and managed a robust pipeline valued at $2.6M ARR, with closed deals
-                contributing $800K in ARR.
+              <span className="block">
+                Pipeline Growth: Drove a $2.6M ARR pipeline of qualified opportunities, closing $800K in ARR and securing 15 new logos across self-service SMB and enterprise sales.
               </span>
             </li>
             <li>
-              <span className="block pl-2 -indent-2">
-                Quota Achievement: Surpassed quarterly MBOs by 200%, qualifying over 250 opportunities ranging from $6K
-                to $600K ARR.
+              <span className="block">
+                Quota Success: Surpassed quarterly MBOs by 200%, qualifying 250+ opportunities ($6K–$600K ARR, $56K ACV) through 400+ discovery and demo calls.
               </span>
             </li>
             <li>
-              <span className="block pl-2 -indent-2">
-                Remote Process Optimization: Implemented and enhanced Salesforce workflows and integrated sales tools to
-                streamline remote sales operations, enabling higher efficiency and transparency.
+              <span className="block">
+                Sales Strategy: Increased sales by 10% by implementing Target Account Selling, leveraging industry-specific USPs and cold outreach campaigns.
               </span>
             </li>
             <li>
-              <span className="block pl-2 -indent-2">
-                Strategic Outreach: Introduced Target Account Selling methodologies that increased sales by 10% through
-                customized industry messaging and cold outreach initiatives.
+              <span className="block">
+                Tool Integration: Streamlined Salesforce workflows and integrated Salesloft, LiveChat, and Sales Navigator, boosting efficiency and transparency for executive reporting and KPIs.
               </span>
             </li>
           </ul>
@@ -177,27 +179,26 @@ const DetailedCV: React.FC = () => {
             Content orchestration platform centralizing and personalizing product documentation
           </p>
           <p className="text-sm text-gray-400 mb-2">Tel-Aviv | October 2016 – July 2019</p>
-          <p className="text-md font-medium mb-2">Enterprise Sales Manager (May 2018 – Jul 2019)</p>
+          <p className="text-md font-medium mb-2">Enterprise Sales Manager / Product Specialist (May 2017 – Jul 2019)</p>
           <ul className="list-disc list-outside pl-5 text-gray-300 space-y-2">
             <li>
-              <span className="block pl-2 -indent-2">
-                Enterprise-Level Sales: Built a sales pipeline of $5.6M, converting opportunities into $2.53M ARR by
-                engaging directly with C-level stakeholders and delivering compelling ROI presentations.
-              </span>
-            </li>
-          </ul>
-          <p className="text-md font-medium mt-4 mb-2">Enterprise Product Specialist (Oct 2016 – Jul 2019)</p>
-          <ul className="list-disc list-outside pl-5 text-gray-300 space-y-2">
-            <li>
-              <span className="block pl-2 -indent-2">
-                Strategic Prospecting: Developed and executed an outbound strategy that increased lead generation by
-                150% and boosted SQL conversion by 10%.
+              <span className="block">
+                Revenue Generation: Grew a sales pipeline of $5.6M, converting opportunities into $2.53M ARR with an ACV of $96K and an average 6-month closing cycle, engaging C-level stakeholders with ROI presentations, demos, and business cases.
               </span>
             </li>
             <li>
-              <span className="block pl-2 -indent-2">
-                Sales Process Engineering: Acted as Salesforce administrator to streamline the lead-to-deal workflow,
-                ensuring efficient qualification and closing cycles.
+              <span className="block">
+                Lead Generation: Orchestrated an outbound strategy that increased lead generation by 150% and boosted SQL conversion by 10%, averaging 60 cold calls daily.
+              </span>
+            </li>
+            <li>
+              <span className="block">
+                Strategic Contributions: Led development of USP, ICP, PMF, sales playbook, ROI, and executive reports, supporting growth and securing a $7.8M funding round.
+              </span>
+            </li>
+            <li>
+              <span className="block">
+                CRM Administration: Administered Salesforce, Hubspot, and social tools to streamline lead-to-deal workflows, ensuring efficient qualification, closing cycles, reporting, and automation.
               </span>
             </li>
           </ul>
@@ -207,29 +208,21 @@ const DetailedCV: React.FC = () => {
           <h4 className="text-lg font-medium mb-1">CLICKSOFTWARE (acquired by Salesforce)</h4>
           <p className="text-sm text-gray-400 mb-2">AI-powered field service management solutions platform</p>
           <p className="text-sm text-gray-400 mb-2">Tel-Aviv | January 2012 – September 2016</p>
-          <p className="text-md font-medium mb-2">SMB Inside Sales Manager (February 2013 – September 2016)</p>
+          <p className="text-md font-medium mb-2">Inside Sales Manager - SMB/Enterprise</p>
           <ul className="list-disc list-outside pl-5 text-gray-300 space-y-2">
             <li>
-              <span className="block pl-2 -indent-2">
-                Pipeline & Revenue Success: Exceeded pipeline targets by 170%, delivering $4.5M in new opportunities and
-                closing $2.7M in ARR.
+              <span className="block">
+                Pipeline Achievement: Exceeded pipeline targets by 170%, delivering $4.5M in new opportunities and closing $2.7M in ARR with an ACV of $50K and a 3-month closing cycle.
               </span>
             </li>
             <li>
-              <span className="block pl-2 -indent-2">
-                Collaborative Selling: Partnered with cross-functional teams (AEs, marketing, and solution engineering)
-                to manage complex, high-volume sales cycles.
+              <span className="block">
+                Cross-Functional Collaboration: Partnered with AEs, marketing, and solution engineering teams to manage complex, high-volume sales cycles.
               </span>
             </li>
-          </ul>
-          <p className="text-md font-medium mt-4 mb-2">
-            Business/Sales Development Manager (January 2012 – February 2013)
-          </p>
-          <ul className="list-disc list-outside pl-5 text-gray-300 space-y-2">
             <li>
-              <span className="block pl-2 -indent-2">
-                Activity & Target Attainment: Consistently met quarterly targets by managing global inbound leads and
-                executing high-volume outbound campaigns (average: 80 cold calls/day and 10 demo meetings/week).
+              <span className="block">
+                Target Attainment: Consistently met quarterly targets through global inbound lead management and high-volume outbound campaigns (80 cold calls/day, 10 demo meetings/week), overachieving KPIs by 30%-40%.
               </span>
             </li>
           </ul>
@@ -240,7 +233,7 @@ const DetailedCV: React.FC = () => {
         initial="hidden"
         animate="visible"
         variants={sectionVariants}
-        transition={{ duration: 0.5, delay: 0.8 }}
+        transition={{ duration: 0.5, delay: 1 }}
         className="mb-12"
       >
         <h3 className="text-2xl font-semibold mb-4 font-poppins text-blue-400">
@@ -248,38 +241,8 @@ const DetailedCV: React.FC = () => {
         </h3>
         <ul className="list-disc list-outside pl-5 text-gray-300 space-y-2">
           <li>
-            <span className="block pl-2 -indent-2">
-              Full-Stack SaaS Application Project: Developed a comprehensive SaaS platform (Next.js frontend, Django
-              backend) featuring authentication, social login, and subscription management. This project underlines my
-              technical acumen and ability to grasp complex products—skills that enable me to effectively communicate
-              value propositions to clients.
-            </span>
-          </li>
-          <li>
-            <span className="block pl-2 -indent-2">
-              Continuous Learning: Regularly engage in professional development initiatives to stay ahead of market
-              trends, particularly within the SaaS and HR-tech landscapes.
-            </span>
-          </li>
-        </ul>
-      </motion.section>
-
-      <motion.section
-        initial="hidden"
-        animate="visible"
-        variants={sectionVariants}
-        transition={{ duration: 0.5, delay: 1 }}
-        className="mb-12"
-      >
-        <h3 className="text-2xl font-semibold mb-2 font-poppins text-blue-400">Education</h3>
-        <h4 className="text-lg font-medium mb-1">California State University, San Bernardino, CA</h4>
-        <p className="text-sm text-gray-400 mb-2">
-          Dual BA in Business Administration (Marketing & Entrepreneurial Management)
-        </p>
-        <ul className="list-disc list-outside pl-5 text-gray-300 space-y-2">
-          <li>
-            <span className="block pl-2 -indent-2">
-              Graduated with a 3.5 GPA; recognized on the Dean's List for two consecutive years
+            <span className="block">
+              Full-Stack SaaS Application Project: Developed a comprehensive SaaS platform (Next.js frontend, Django backend) featuring authentication, social login, and subscription management. This project underlines my technical acumen and ability to grasp complex products—skills that enable me to effectively communicate value propositions to clients.
             </span>
           </li>
         </ul>
@@ -292,21 +255,42 @@ const DetailedCV: React.FC = () => {
         transition={{ duration: 0.5, delay: 1.2 }}
         className="mb-12"
       >
+        <h3 className="text-2xl font-semibold mb-2 font-poppins text-blue-400">Education</h3>
+        <h4 className="text-lg font-medium mb-1">California State University, San Bernardino, CA</h4>
+        <p className="text-sm text-gray-400 mb-2">
+          Dual BA in Business Administration (Marketing & Entrepreneurial Management)
+        </p>
+        <ul className="list-disc list-outside pl-5 text-gray-300 space-y-2">
+          <li>
+            <span className="block">
+              Graduated with a 3.5 GPA; recognized on the Dean's List for two consecutive years
+            </span>
+          </li>
+        </ul>
+      </motion.section>
+
+      <motion.section
+        initial="hidden"
+        animate="visible"
+        variants={sectionVariants}
+        transition={{ duration: 0.5, delay: 1.4 }}
+        className="mb-12"
+      >
         <h3 className="text-2xl font-semibold mb-2 font-poppins text-blue-400">Additional Information</h3>
         <ul className="list-disc list-outside pl-5 text-gray-300 space-y-2">
           <li>
-            <span className="block pl-2 -indent-2">Languages: Fluent in English and Hebrew</span>
+            <span className="block">Languages: Fluent in English and Hebrew</span>
           </li>
           <li>
-            <span className="block pl-2 -indent-2">Work Authorization: U.S. Citizen</span>
+            <span className="block">Work Authorization: U.S. Citizen</span>
           </li>
           <li>
-            <span className="block pl-2 -indent-2">
+            <span className="block">
               Remote Work Experience: Proven ability to thrive in distributed teams and dynamic startup environments
             </span>
           </li>
           <li>
-            <span className="block pl-2 -indent-2">
+            <span className="block">
               LinkedIn:{" "}
               <a
                 href="https://linkedin.com/in/davidghazy"
@@ -319,7 +303,7 @@ const DetailedCV: React.FC = () => {
             </span>
           </li>
           <li>
-            <span className="block pl-2 -indent-2">
+            <span className="block">
               GitHub:{" "}
               <a
                 href="https://github.com/davidghazy"
@@ -338,4 +322,3 @@ const DetailedCV: React.FC = () => {
 }
 
 export default DetailedCV
-
