@@ -38,7 +38,10 @@ export default function ClientHome() {
       isLibPly: true,
       fullDescription:
         "A powerful music library application that integrates with your existing music collection and uses AI to generate personalized playlists based on your listening habits and preferences.",
-      links: [{ title: "GitHub", url: "https://github.com/LibPly" }],
+        links: [
+          { title: "GitHub", url: "https://github.com/LibPly" },
+          { title: "libply.com", url: "https://plylib.com" },
+        ],
     },
     {
       title: "Bazel MonoRepo",
