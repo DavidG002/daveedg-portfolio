@@ -1,5 +1,5 @@
 # ---------- Stage 1: Build ----------
-    FROM node:23-alpine AS builder
+    FROM node:18-alpine AS builder
 
     # Set working directory
     WORKDIR /app
@@ -8,16 +8,16 @@
     COPY package.json pnpm-lock.yaml ./
     
     # Install pnpm globally and all dependencies (including dev dependencies)
-    RUN npm install -g pnpm && pnpm install --frozen-lockfile
+    RUN npm install -g pnpm && pnpm install
     
     # Copy the rest of your code
     COPY . .
     
     # Build the project using NX (this will output to the default ".next" directory)
-    RUN pnpm nx build start-portfolio
+    RUN pnpm next build
     
     # ---------- Stage 2: Production Runner ----------
-    FROM node:23-alpine AS runner
+    FROM node:18-alpine AS runner
     
     # Set production environment
     ENV NODE_ENV=production
@@ -35,7 +35,7 @@
     COPY --from=builder /app/public ./public
     
     # Install production dependencies only
-    RUN npm install -g pnpm && pnpm install --prod --frozen-lockfile
+    RUN npm install -g pnpm && pnpm install --prod
     
     # Expose port 3000 (or whichever port you plan to use)
     EXPOSE 3000

@@ -1,5 +1,5 @@
 {
-  "name": "start-portfolio",
+  "name": ".",
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "src",
   "projectType": "application",
@@ -7,7 +7,7 @@
     "serve": {
       "executor": "@nx/next:server",
       "options": {
-        "buildTarget": "start-portfolio:build",
+        "buildTarget": ".:build",
         "port": 3000
       }
     },
@@ -20,10 +20,7 @@
     },
     "start": {
       "executor": "@nx/next:start",
-      "options": {
-        "buildTarget": "start-portfolio:build",
-        "prod": true
-      }
+      "options": {}
     },
     "lint": {
       "executor": "@nx/linter:eslint",
