@@ -1,7 +1,11 @@
 
 services:
   daveedg-portfolio:
-    build: ..
+    build:
+      context: ..
+      args:
+          - NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=${NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}
+          - AUTH_PASSWORD=${AUTH_PASSWORD}
     ports:
       - "3000:3000"
     environment:

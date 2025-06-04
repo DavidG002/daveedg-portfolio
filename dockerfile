@@ -12,6 +12,11 @@
     
     # Copy the rest of your code
     COPY . .
+
+    ARG NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+    ARG AUTH_PASSWORD
+    ENV NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=$NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+    ENV AUTH_PASSWORD=$AUTH_PASSWORD
     
     # Build the project using NX (this will output to the default ".next" directory)
     RUN pnpm next build
