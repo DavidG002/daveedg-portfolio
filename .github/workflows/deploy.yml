@@ -27,8 +27,10 @@ jobs:
             git fetch origin
             git reset --hard origin/main
             cd infra
-            # Export AUTH_PASSWORD from GitHub secrets
             export AUTH_PASSWORD=${{ secrets.AUTH_PASSWORD }}
+            export NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=${{ secrets.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME }}
+            export CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}
+            export CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}
             docker compose down
             docker system prune -f --volumes
             docker compose build --no-cache

@@ -1,9 +1,7 @@
-//@ts-check
-
-// Default fallback functions
+/** @type {import('next').NextConfig} */
 const defaultWithNx = (config) => config;
 let withNx = defaultWithNx;
-let composePlugins = null; // Set to null initially
+let composePlugins = null;
 
 try {
   // Load NX Next plugin
@@ -19,7 +17,22 @@ if (withNx !== defaultWithNx) {
 }
 
 // Next.js config
-const nextConfig = {};
+const nextConfig = {
+  reactStrictMode: false, // Set to false as per your original setup
+  env: {
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
+};
 
 // Export the config, applying plugins only if composePlugins is available
 module.exports = composePlugins ? composePlugins(...plugins)(nextConfig) : nextConfig;
