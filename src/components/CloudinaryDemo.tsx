@@ -1,8 +1,43 @@
 // C:\Users\David\Apps-Start\Start-Portfolio\src\components\CloudinaryDemo.tsx
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
-import { CldImage, CldUploadWidget, CloudinaryUploadWidgetResults, CloudinaryUploadWidgetInfo } from 'next-cloudinary';
+import { useState, useCallback, useEffect, useRef } from 'react';
+import {
+  CldImage,
+  CldUploadWidget,
+  CloudinaryUploadWidgetResults,
+  CloudinaryUploadWidgetInfo,
+} from 'next-cloudinary';
+
+// Define TypeScript interface for Cloudinary transformations
+interface Transformation {
+  [key: string]: string | number | boolean;
+}
+
+// Define TypeScript interface for Cloudinary Media Library
+interface CloudinaryMediaLibrary {
+  openMediaLibrary: (
+    config: {
+      cloud_name: string;
+      api_key: string;
+      insert_caption?: string;
+      max_files?: number;
+      multiple?: boolean;
+      default_transformations?: Array<Array<Transformation>>;
+    },
+    callbacks: {
+      insertHandler: (data: { assets: Array<{ public_id: string; secure_url: string }> }) => void;
+      error?: (error: Error | string) => void;
+    }
+  ) => void;
+}
+
+// Extend Window interface for Cloudinary
+declare global {
+  interface Window {
+    cloudinary: CloudinaryMediaLibrary;
+  }
+}
 
 export default function CloudinaryDemo() {
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
@@ -18,12 +53,78 @@ export default function CloudinaryDemo() {
   const [useCartoonify, setUseCartoonify] = useState(false);
   const [contrastValue, setContrastValue] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const cloudinaryRef = useRef<CloudinaryMediaLibrary | null>(null);
 
   const galleryImages = [
     { publicId: 'sample', alt: 'Sample Image 1', title: 'Beautiful Landscape' },
     { publicId: 'cld-sample', alt: 'Sample Image 2', title: 'City Skyline' },
     { publicId: 'cld-sample-2', alt: 'Sample Image 3', title: 'Mountain Adventure' },
   ];
+
+  // Load Cloudinary Media Library script
+  useEffect(() => {
+    if (cloudinaryRef.current) return;
+
+    const script = document.createElement('script');
+    script.src = 'https://media-library.cloudinary.com/global/all.js';
+    script.async = true;
+
+    script.onload = () => {
+      cloudinaryRef.current = window.cloudinary;
+    };
+
+    script.onerror = () => {
+      console.error('Failed to load Cloudinary Media Library script');
+      setError('Failed to load Cloudinary Media Library.');
+    };
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  // Open Media Library Widget
+  const openMediaLibrary = useCallback(() => {
+    if (!cloudinaryRef.current) {
+      console.error('Cloudinary Media Library not loaded');
+      setError('Media Library not available. Please try again.');
+      return;
+    }
+
+    const apiKey = process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY;
+    if (!apiKey) {
+      console.error('Cloudinary API key is missing');
+      setError('Cloudinary API key is not configured. Please contact support.');
+      return;
+    }
+
+    cloudinaryRef.current.openMediaLibrary(
+      {
+        cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'dg1jnl6yl',
+        api_key: apiKey,
+        insert_caption: 'Insert Media',
+        max_files: 1,
+        multiple: false,
+      },
+      {
+        insertHandler: (data) => {
+          if (data.assets && data.assets.length > 0) {
+            const asset = data.assets[0];
+            setUploadedImageUrl(asset.secure_url);
+            setPublicId(asset.public_id);
+            setNotification('Media selected from library!');
+            console.log('Selected asset:', asset);
+          }
+        },
+        error: (err) => {
+          console.error('Media Library error:', err);
+          setError('Failed to select media from library.');
+        },
+      }
+    );
+  }, []);
 
   const handleImageClick = useCallback((publicId: string, title: string) => {
     console.log('Image clicked:', publicId);
@@ -105,7 +206,7 @@ export default function CloudinaryDemo() {
   }, [notification]);
 
   return (
-    <div className="space-y-4 bg-white p-4 rounded-lg shadow-lg max-w-4xl mx-auto">
+    <div className="space-y-4 bg-white p-6 rounded-xl shadow-xl max-w-4xl mx-auto">
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4">
           {error}
@@ -170,7 +271,7 @@ export default function CloudinaryDemo() {
             max="100"
             value={contrastValue}
             onChange={(e) => setContrastValue(Number(e.target.value))}
-            className="w-full"
+            className="w-full accent-blue-600"
           />
         </div>
         <p className="text-gray-600 mb-4">
@@ -219,76 +320,114 @@ export default function CloudinaryDemo() {
             </button>
           ))}
         </div>
-        <p className="mt-2 text-gray-600">Images are optimized with responsive sizes, AI-based cropping, and lazy loading for performance.</p>
+        <p className="mt-2 text-gray-600">
+          Images are optimized with responsive sizes, AI-based cropping, and lazy loading for
+          performance.
+        </p>
       </section>
 
-      {/* Image Upload */}
-      <section>
-        <h2 className="text-2xl font-semibold mb-2 text-gray-900">Interactive Image Upload</h2>
-        <CldUploadWidget
-          uploadPreset="portfolio_unsigned"
-          options={{
-            cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'dg1jnl6yl',
-          }}
-          onSuccess={handleUploadSuccess}
-          onError={(error) => {
-            console.error('Upload Widget Error:', error);
-            setError('Failed to initialize upload widget.');
-            setIsUploading(false);
-            setIsDragging(false);
-          }}
-          onOpen={() => {
-            console.log('Upload widget opened');
-            setIsUploading(true);
-          }}
-          onClose={() => {
-            console.log('Upload widget closed');
-            setIsUploading(false);
-            setIsDragging(false);
-          }}
-        >
-          {({ open }) => (
-            <div
-              className={`border-2 border-dashed rounded-lg p-6 mb-4 flex flex-col items-center justify-center transition-colors ${
-                isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300 bg-gray-50'
-              } ${isUploading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              onDrop={(e) => handleDrop(e, open)}
-              onClick={() => !isUploading && open()}
-            >
-              {isUploading ? (
-                <div className="flex flex-col items-center gap-2">
-                  <svg className="animate-spin h-8 w-8 text-blue-600" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8h8a8 8 0 01-8 8 8 8 0 01-8-8z" />
-                  </svg>
-                  <p className="text-gray-700">Uploading...</p>
-                </div>
-              ) : (
-                <div className="flex flex-col items-center gap-2">
-                  <svg className="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 4v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6m12-4v4m0 0l-3-3m3 3l3-3" />
-                  </svg>
-                  <p className="text-gray-700">Drag and drop an image here or click to upload</p>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      console.log('Attempting to open upload widget');
-                      if (open) open();
-                    }}
-                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50 pointer-events-auto mt-2"
-                    disabled={isUploading}
-                  >
-                    Upload Image
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
-        </CldUploadWidget>
+      {/* Image Upload and Media Library */}
+      <section className="bg-gray-50 p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-semibold mb-4 text-gray-900 border-b-2 border-blue-600 pb-2">Interactive Image Upload</h2>
+        <div className="mb-6">
+          <CldUploadWidget
+            uploadPreset="portfolio_unsigned"
+            options={{
+              cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'dg1jnl6yl',
+            }}
+            onSuccess={handleUploadSuccess}
+            onError={(error) => {
+              console.error('Upload Widget Error:', error);
+              setError('Failed to initialize upload widget.');
+              setIsUploading(false);
+              setIsDragging(false);
+            }}
+            onOpen={() => {
+              console.log('Upload widget opened');
+              setIsUploading(true);
+            }}
+            onClose={() => {
+              console.log('Upload widget closed');
+              setIsUploading(false);
+              setIsDragging(false);
+            }}
+          >
+            {({ open }) => (
+              <div
+                className={`border-4 border-dashed rounded-xl p-8 flex flex-col items-center justify-center transition-all duration-300 ${
+                  isDragging ? 'border-blue-600 bg-blue-100 shadow-lg' : 'border-gray-300 bg-gray-100 hover:bg-gray-200'
+                } ${isUploading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={(e) => handleDrop(e, open)}
+                onClick={() => !isUploading && open()}
+              >
+                {isUploading ? (
+                  <div className="flex flex-col items-center gap-2">
+                    <svg
+                      className="animate-spin h-10 w-10 text-blue-600"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v8h8a8 8 0 01-8 8 8 8 0 01-8-8z"
+                      />
+                    </svg>
+                    <p className="text-gray-700 font-medium">Uploading...</p>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center gap-4">
+                    <svg
+                      className="h-12 w-12 text-blue-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M7 16V4m0 0L3 8m4-4l4 4m6 4v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6m12-4v4m0 0l-3-3m3 3l3-3"
+                      />
+                    </svg>
+                    <p className="text-gray-700 font-medium text-lg">Drag and drop an image here or click to upload</p>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        console.log('Attempting to open upload widget');
+                        if (open) open();
+                      }}
+                      className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-lg hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 pointer-events-auto shadow-md transition-all duration-300"
+                      disabled={isUploading}
+                    >
+                      Upload Image
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </CldUploadWidget>
+        </div>
+        <div className="flex justify-center">
+          <button
+            onClick={openMediaLibrary}
+            className="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-2 rounded-lg hover:from-green-700 hover:to-green-800 disabled:opacity-50 pointer-events-auto shadow-md transition-all duration-300"
+            disabled={isUploading}
+          >
+            Open Media Library
+          </button>
+        </div>
         {uploadedImageUrl && (
-          <div className="mt-4">
+          <div className="mt-6">
             <div className="relative group">
               <CldImage
                 src={publicId}
@@ -304,7 +443,6 @@ export default function CloudinaryDemo() {
               <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
                 Uploaded Image
               </div>
-              {/* Thumbnail Preview */}
               <CldImage
                 src={publicId}
                 width={100}
@@ -317,17 +455,19 @@ export default function CloudinaryDemo() {
             <div className="flex justify-center mt-2">
               <button
                 onClick={handleRemoveImage}
-                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 pointer-events-auto"
+                className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-2 rounded-lg hover:from-red-700 hover:to-red-800 pointer-events-auto shadow-md transition-all duration-300"
               >
                 Remove Image
               </button>
             </div>
-            <p className="mt-2 text-gray-600 text-center">Uploaded image with rounded corners and thumbnail preview.</p>
+            <p className="mt-2 text-gray-600 text-center">
+              Uploaded image with rounded corners and thumbnail preview.
+            </p>
           </div>
         )}
       </section>
 
-      {/* Videodrink Player */}
+      {/* Video Player */}
       <section>
         <h2 className="text-2xl font-semibold mb-2 text-gray-900">Optimized Video Delivery</h2>
         <div className="w-full max-w-full aspect-[16/9] overflow-hidden rounded-lg">
@@ -348,12 +488,17 @@ export default function CloudinaryDemo() {
             Your browser does not support the video tag.
           </video>
         </div>
-        <p className="mt-2 text-gray-600">Delivers optimized video with adaptive bitrate streaming.</p>
+        <p className="mt-2 text-gray-600">
+          Delivers optimized video with adaptive bitrate streaming.
+        </p>
       </section>
 
       {/* Lightbox Modal */}
       {selectedImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-10 pointer-events-auto" onClick={closeLightbox}>
+        <div
+          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-10 pointer-events-auto"
+          onClick={closeLightbox}
+        >
           <div className="relative max-w-4xl w-full p-4">
             <button
               className="absolute top-2 right-2 text-white text-2xl pointer-events-auto"

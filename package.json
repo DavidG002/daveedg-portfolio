@@ -13,6 +13,8 @@
     "includedScripts": []
   },
   "dependencies": {
+    "@cloudinary/html": "^1.13.4",
+    "@cloudinary/url-gen": "^1.21.0",
     "@nx/next": "^20.4.3",
     "framer-motion": "^12.4.2",
     "lucide-react": "^0.475.0",
