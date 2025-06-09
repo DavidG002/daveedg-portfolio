@@ -27,13 +27,13 @@ export default function CloudinaryDemoPage() {
         <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">Cloudinary Demo</h1>
         <section className="mb-12">
           <p className="text-lg text-gray-600 text-center mb-6 max-w-3xl mx-auto">
-            Discover the power of Cloudinary’s media management tools. Below, explore optimized image galleries, seamless uploads, and high-quality video delivery, all designed to enhance your media experience.
+            The power of Cloudinary’s media management tools. Explore optimized image galleries, seamless uploads, and high-quality video delivery, all designed to enhance media experience.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-blue-600 mb-2">Optimized Image Gallery</h3>
               <p className="text-gray-600 text-sm">
-                Showcase stunning images with real-time transformations, optimized for speed and quality.
+                Showcase images with real-time transformations, optimized for speed and quality.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
